@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// UserInfo 定义用户结构体
 type UserInfo struct {
 	Name   string
 	Gender string
@@ -31,10 +32,20 @@ func sayHello(w http.ResponseWriter, r *http.Request) {
 		Gender: "男",
 		Age:    26,
 	}
+
+	hobbyList := []string{
+		"篮球",
+		"足球",
+		"乒乓球",
+		"羽毛球",
+		"口风琴",
+		"小提琴",
+	}
 	//将结构体写入到模板
 	tmpl.Execute(w, map[string]interface{}{
-		"u1": u1,
-		"u2": u2,
+		"u1":    u1,
+		"u2":    u2,
+		"hobby": hobbyList,
 	})
 }
 
