@@ -20,17 +20,27 @@ func sayHello(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// 利用给定数据渲染模板，并将结果写入w
-	user := UserInfo{
-		Name:   "小王子",
+	u1 := UserInfo{
+		Name:   "奥特曼",
 		Gender: "男",
 		Age:    18,
 	}
-	tmpl.Execute(w, user)
+
+	u2 := UserInfo{
+		Name:   "小怪兽",
+		Gender: "男",
+		Age:    26,
+	}
+	//将结构体写入到模板
+	tmpl.Execute(w, map[string]interface{}{
+		"u1": u1,
+		"u2": u2,
+	})
 }
 
 func main() {
 	http.HandleFunc("/", sayHello)
-	err := http.ListenAndServe(":9080", nil)
+	err := http.ListenAndServe(":9096", nil)
 	if err != nil {
 		fmt.Println("Http server faild,err=", err)
 		return
